@@ -1,4 +1,3 @@
-using CompanyMicroserviceAPI;
 using CompanyMicroserviceAPI.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Configure Kestrel server to listen on all interfaces on port 5000
 builder.WebHost.UseKestrel()
                .UseUrls("http://0.0.0.0:5000");
+
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+
 
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -24,9 +28,9 @@ var app = builder.Build();
 // Configure Swagger for development
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
+
 
 // Remove HTTPS redirection if not using HTTPS
 // app.UseHttpsRedirection();
