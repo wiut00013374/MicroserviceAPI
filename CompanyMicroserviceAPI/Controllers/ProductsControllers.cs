@@ -19,9 +19,19 @@ namespace CompanyMicroserviceAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetProducts()
         {
-            var products = await _productService.GetAllProductsAsync();
-            return Ok(products);
+            try
+            {
+                var products = await _productService.GetAllProductsAsync();
+                return Ok(products);
+            }
+            catch (Exception ex)
+            {
+                // Log the error details (implement logging as needed)
+                Console.WriteLine($"Error retrieving products: {ex.Message}");
+                return StatusCode(500, "Internal server error.");
+            }
         }
+
 
         // GET: api/products/5
         [HttpGet("{id}")]
