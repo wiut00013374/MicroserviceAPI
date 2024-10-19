@@ -5,7 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Configure Kestrel server to listen on all interfaces on port 5000
 builder.WebHost.UseKestrel()
-               .UseUrls("http://0.0.0.0:5000");
+               .UseUrls("http://0.0.0.0:5001");
+
 
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
