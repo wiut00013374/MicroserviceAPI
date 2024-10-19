@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure Kestrel server to listen on all interfaces on port 5000
 builder.WebHost.UseKestrel()
                .UseUrls("http://0.0.0.0:5000");
 
@@ -20,14 +21,16 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// Configure Swagger for development
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// Remove HTTPS redirection if not using HTTPS
+// app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
-app.Run();
+app.Run();  // Start the application
