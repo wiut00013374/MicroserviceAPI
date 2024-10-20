@@ -1,7 +1,10 @@
 using CompanyMicroserviceAPI.Services;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
+
+ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
 // Configure Kestrel server to listen on all interfaces on port 5001
 builder.WebHost.UseKestrel()
